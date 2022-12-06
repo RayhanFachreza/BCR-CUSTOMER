@@ -5,7 +5,8 @@ import Footer from './components/footer';
 import HomePage from './pages/home-page';
 import FindCar from './pages/find-car';
 import CarDetail from './pages/car-detail';
-import PaymentDesc from './components/sub/payment-desc';
+import Payment from './pages/payment';
+import BankConfirm from './pages/bank-confirm'
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/find-car" element={<FindCar />} />
         <Route path="/find-car/:id" element={<CarDetail />} />
-        <Route path="/payment" element={<PaymentDesc />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/bank-confirm" element={<BankConfirm />} />
       </Routes>
       <Footer />
     </div>
