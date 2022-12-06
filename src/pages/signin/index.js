@@ -4,6 +4,8 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Loginkanan from '../../assets/images/login.svg'
 import Logologin from '../../assets/images/logo.svg';
 import Closelogo from  '../../assets/images/close.svg';
+import { Link } from "react-router-dom";
+
 
 
 const Signin = () => {
@@ -43,7 +45,11 @@ const Signin = () => {
                             </Form>
                             <div className="bawah-button">
                                 <h3>Don’t have an account?</h3> 
-                                <h4><a href="">Sign Up for free</a></h4>
+                                <h4>
+                                <Link to="/sign-up" relative="path">
+                                Sign Up for free
+                                </Link>
+                                </h4>
                                 
                             </div>
                         </div>

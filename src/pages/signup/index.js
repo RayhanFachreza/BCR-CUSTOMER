@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Signupkanan from '../../assets/images/login.svg'
 import Logoregister from '../../assets/images/logo.svg';
 import Closelogo from  '../../assets/images/close.svg';
-
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
@@ -18,9 +18,13 @@ const Signup = () => {
                         <a href="/"><img src={Logoregister} alt="BCR" className='homelogo' /></a>
                         <img src={Closelogo} alt="close" className='closelogo'/>
                         </div>
-                        <h1>Welcome Back!   </h1>
+                        <h1>Sign Up</h1>
                         <Form>
                         <Form.Group className="mb-3 email" controlId="formBasicEmail">
+                            <Form.Label>
+                                <h3>Name</h3>
+                            </Form.Label>
+                            <Form.Control type="text" placeholder="Nama Lengkap" className="namaform" />
                             <Form.Label>
                                 <h3>Email</h3>
                             </Form.Label>
@@ -42,8 +46,12 @@ const Signup = () => {
                         </div>
                         </Form>
                         <div className="bawah-button">
-                            <h3>Don’t have an account?</h3> 
-                            <h4><a href="">Sign Up for free</a></h4>
+                            <h3>Already have an account?</h3> 
+                            <h4>
+                            <Link to="/sign-in" relative="path">
+                            Sign In here
+                            </Link>
+                            </h4>
                             
                         </div>
                     </div>

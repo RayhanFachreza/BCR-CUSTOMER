@@ -13,7 +13,7 @@ import BankConfirm from './pages/bank-confirm'
 const App = () => {
   return (
     <div className="App">
-      <Header />
+      {["/sign-in","/sign-up"].indexOf(window.location.pathname) === -1 && <Header />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/find-car" element={<FindCar />} />
@@ -23,7 +23,8 @@ const App = () => {
         <Route path="/payment" element={<Payment />} />
         <Route path="/payment/bank-confirm" element={<BankConfirm />} />
       </Routes>
-      <Footer />
+      {["/sign-in","/sign-up"].indexOf(window.location.pathname) === -1 && <Footer />}
+      
     </div>
   );
 };
