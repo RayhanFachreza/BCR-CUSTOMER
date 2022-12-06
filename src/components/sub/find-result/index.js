@@ -139,7 +139,7 @@ const FindResult = () => {
           )}
           {emptyData &&
             <div className="noData">
-              <img src={noCar} />
+              <img src={noCar} alt=".." />
               <h3>Mobil yang kamu cari tidak ditemukan</h3>
               <h4>"Coba ubah kata kunci atau filter yang kamu gunakan"</h4>
             </div>}
