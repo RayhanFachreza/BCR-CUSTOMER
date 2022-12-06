@@ -7,8 +7,8 @@ import FindCar from './pages/find-car';
 import CarDetail from './pages/car-detail';
 import Signup from './pages/signup';
 import Signin from './pages/signin';
-
-
+import Payment from './pages/payment';
+import BankConfirm from './pages/bank-confirm'
 
 const App = () => {
   return (
@@ -20,6 +20,8 @@ const App = () => {
         <Route path="/find-car/:id" element={<CarDetail />} />
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<Signup/>} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/payment/bank-confirm" element={<BankConfirm />} />
       </Routes>
       <Footer />
     </div>
