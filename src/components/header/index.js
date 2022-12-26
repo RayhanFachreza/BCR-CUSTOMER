@@ -49,7 +49,10 @@ const Header = () => {
                     <a href='#faq'>FAQ</a>
                   </li>
                   <li className='buttonregist'>
-                  <Link to={'/sign-up'} className="btn">Register</Link>
+                  <Link
+                   to={'/sign-up'} 
+                   className="btn">Register
+                  </Link>
                   </li>
                 </ul>
               </div>

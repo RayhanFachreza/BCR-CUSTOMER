@@ -48,6 +48,7 @@
 
 a.btn:hover {
   color: black !important;
+  text-decoration: none !important;
 }
 
 

@@ -33,6 +33,11 @@ img.homelogo {
     margin-bottom: 32px;
 } */
 
+.form-control {
+    color: black;
+    font-weight: 500;
+}
+
 img.closelogo {
     width: 28px !important;
     visibility: hidden;

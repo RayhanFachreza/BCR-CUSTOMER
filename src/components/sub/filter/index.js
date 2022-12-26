@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import './style.css';
 
@@ -6,6 +7,7 @@ import './style.css';
 const Filter = (filterData) => {
   const [active, setActive] = useState(false);
 
+  
   const overlayActive = () => {
     document.body.style.overflow = "hidden";
     setActive(true);
@@ -14,9 +16,9 @@ const Filter = (filterData) => {
     document.body.style.overflow = "";
     setActive(false);
   };
-
+  
   const titleRef = useRef()
-
+  
   function handleBackClick() {
     titleRef.current.scrollIntoView({
       behavior: 'smooth',
@@ -24,8 +26,9 @@ const Filter = (filterData) => {
       inline: 'center'
     })
   };
-
-
+  
+  const location = useLocation();
+  
   return (
     <section
       className="filter"
@@ -50,6 +53,7 @@ const Filter = (filterData) => {
                         className="form-control"
                         placeholder="Ketik nama/tipe mobil"
                         ref={filterData.carName}
+                        disabled = {location.pathname !== '/find-car'}
                       />
                     </div>
                   </div>
@@ -71,6 +75,7 @@ const Filter = (filterData) => {
                       <option value="large">6 - 8 orang</option>
                     </select> */}
                     <Select
+                      isDisabled = {location.pathname !== '/find-car'}
                       className="select-form"
                       classNamePrefix="select"
                       placeholder="Masukan Kapasitas Mobil"
@@ -81,7 +86,8 @@ const Filter = (filterData) => {
                         { value: "small", label: '2 - 4 orang' },
                         { value: "medium", label: '4 - 6 orang' },
                         { value: "large", label: '6 - 8 orang' }
-                      ]} />
+                      ]}
+                      />
                   </div>
                 </div>
 
@@ -101,9 +107,10 @@ const Filter = (filterData) => {
                       <option value="large"> {'> Rp. 600.000'} </option>
                     </select> */}
                     <Select
+                      isDisabled = {location.pathname !== '/find-car'}
+                      placeholder="Masukan Harga Sewa per Hari"
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder="Masukan Harga Sewa per Hari"
                       onFocus={overlayActive}
                       ref={filterData.priceRange}
                       onChange={(e) => filterData.priceRange.current.value = e.value}
@@ -128,6 +135,7 @@ const Filter = (filterData) => {
                       <option value="false">Disewa</option>
                     </select> */}
                     <Select
+                      isDisabled = {location.pathname !== '/find-car'}
                       className="select-form"
                       classNamePrefix="select"
                       placeholder=""
@@ -141,7 +149,6 @@ const Filter = (filterData) => {
                   </div>
                 </div>
               </div>
-
               <div className="submit">
                 <div className="button">
                   <button
@@ -151,8 +158,9 @@ const Filter = (filterData) => {
                   >
                     Cari Mobil
                   </button>
-                </div>
+                </div> 
               </div>
+              
 
             </form>
           </div>

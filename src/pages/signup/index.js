@@ -1,12 +1,31 @@
-import React from 'react'
+import {useState, React} from 'react'
 import './style.scss'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Signupkanan from '../../assets/images/login.svg'
 import Logoregister from '../../assets/images/logo.svg';
 import Closelogo from  '../../assets/images/close.svg';
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 const Signup = () => {
+    // const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        axios.post('https://bootcamp-rent-cars.herokuapp.com/customer/auth/register', {email, password} )
+        .then((res) => {
+            window.location.href = '/sign-in';
+            console.log(res);
+        })
+        .catch((e) => console.log(e));
+    }
+
+
+
+
   return (
     <div className="signup">
     <Container fluid>
@@ -16,32 +35,37 @@ const Signup = () => {
                     <div className="signup-konten">
                         <div className="logo-signup">
                         <a href="/"><img src={Logoregister} alt="BCR" className='homelogo' /></a>
+                        <Link to={'/'}>
                         <img src={Closelogo} alt="close" className='closelogo'/>
+                        </Link>
                         </div>
                         <h1>Sign Up</h1>
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3 email" controlId="formBasicEmail">
                             <Form.Label>
                                 <h3>Name</h3>
                             </Form.Label>
-                            <Form.Control type="text" placeholder="Nama Lengkap" className="namaform" />
+                            <Form.Control type="text" placeholder="Nama Lengkap" className="namaform"
+                            // onChange={(e)=>setName(e.target.value)}
+                            />
                             <Form.Label>
                                 <h3>Email</h3>
                             </Form.Label>
-                            <Form.Control type="email" placeholder="Contoh: johndee@gmail.com" />
-                            {/* <Form.Text className="text-muted">
-                            We'll........... nev,,,,,,,er share your email with anyone else.
-                            </Form.Text> */}
+                            <Form.Control type="email" placeholder="Contoh: johndee@gmail.com"
+                            onChange={(e)=>setEmail(e.target.value)}
+                            />
                         </Form.Group>
                         <Form.Group className="mb-3 password" controlId="formBasicPassword">
                             <Form.Label> 
                                 <h3>Password</h3>
                             </Form.Label>
-                            <Form.Control type="password" placeholder="6+ karakter  " />
+                            <Form.Control type="password" placeholder="6+ karakter"
+                            onChange={(e)=>setPassword(e.target.value)}
+                            />
                         </Form.Group>
                         <div className="d-grid gap-2">
                             <Button variant="primary" type="submit" size="lg">
-                                <h2>Sign In</h2>
+                                <h2>Sign Up</h2>
                             </Button>
                         </div>
                         </Form>

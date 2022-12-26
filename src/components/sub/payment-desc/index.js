@@ -54,6 +54,7 @@ const PaymentDesc = () => {
             </div>
           </div>
         </div>
+
         <div className="filter-disabled">
           <div className="container">
             <div className="disabled">
@@ -81,6 +82,8 @@ const PaymentDesc = () => {
             </div>
           </div>
         </div>
+
+
         <div className="payment-detail">
           <div className="container">
             <div className="row">
