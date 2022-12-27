@@ -9,6 +9,7 @@ import { DateRangePicker } from 'rsuite';
 import Button from 'react-bootstrap/Button';
 import 'rsuite/dist/rsuite.min.css';
 import moment from 'moment';
+import 'moment/locale/id'
 import Filter from '../filter';
 
 // import { differenceInDays } from 'date-fns'
@@ -19,9 +20,12 @@ import Filter from '../filter';
 const CarDesc = () => {
   const [detail, setDetail] = useState({});
   const [dateRange, setDateRange] = useState(null)
-
   const [buttonDisabled, setButtonDisabled] = useState(true);
-  
+  const { allowedMaxDays, beforeToday, combine } =  DateRangePicker;  
+  let { id } = useParams();
+  // const baseUrl = 'http://localhost:4000';
+  const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
+  const fetch = useRef(true);
   const handleChange = (update) => {
     // enable the button when the input changes
     setButtonDisabled(false);
@@ -31,26 +35,18 @@ const CarDesc = () => {
   const handleClose = () => {
     setButtonDisabled(true)
   } 
-
+  moment.locale('id')
   const handleSubmit= () => {
     const totalhari = moment(dateRange[1]).diff(moment(dateRange[0]), 'days')
+    const mulaiSewa = moment(dateRange[0]).format('dddd, MMMM Do YYYY');
+    const akhirSewa = moment(dateRange[1]).format('dddd, MMMM Do YYYY');
     console.log(totalhari)
     window.localStorage.setItem('Jumlah_Hari', totalhari)
-    window.location.href = '/payment/:id'
+    window.localStorage.setItem('mulai_sewa', mulaiSewa)
+    window.localStorage.setItem('akhir_sewa', akhirSewa)
+    window.location.href = `/payment/${id}`
     //  `/find-car/${car.id}`
   }
-  
-  
-  const { allowedMaxDays, beforeToday, combine } =
-  DateRangePicker;  
-  
-  
-  let { id } = useParams();
-
-  // const baseUrl = 'http://localhost:4000';
-  const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
-
-  const fetch = useRef(true);
 
   const getDetail = (id) => {
     Axios.get(`${baseUrl}/car/${id}`)

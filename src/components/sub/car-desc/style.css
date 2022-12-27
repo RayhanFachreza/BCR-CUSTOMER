@@ -1,3 +1,49 @@
+/* DATE PICKER STYLING */
+/* DATE PICKER STYLING */
+/* DATE PICKER STYLING */
+
+.rs-calendar-table-cell-selected .rs-calendar-table-cell-content {
+  background-color: #35B0A7 !important;
+}
+
+.rs-btn-sm {
+  width: 685% !important;
+  background-color: #35B0A7 !important;
+  border-radius: 2px !important;
+}
+
+.rs-btn-primary.rs-btn-disabled,
+.rs-btn-primary:disabled {
+  width: 685% !important;
+  background-color: #35B0A7 !important;
+  border-radius: 2px !important;
+}
+
+
+.rs-picker-menu .rs-calendar .rs-calendar-table-header-row .rs-calendar-table-cell-content {
+  font-family: 'Arial';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #222222;
+}
+
+.rs-picker-daterange-calendar-single {
+  width: 280px !important;
+}
+
+.rs-picker-daterange-menu .rs-picker-daterange-calendar-single .rs-calendar {
+  background: #FFFFFF;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 100%;
+}
+
+.rs-picker-daterange-header {
+  display: none;
+}
+
 .rs-picker-toolbar .rs-stack {
   width: 0;
 }
@@ -18,7 +64,6 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
-  ;
 }
 
 .rs-btn-icon.rs-btn-xs {
@@ -59,6 +104,10 @@
 .rs-picker-toggle-value {
   color: #3C3C3C !important;
 }
+
+/* DATE PICKER STYLING */
+/* DATE PICKER STYLING */
+/* DATE PICKER STYLING */
 
 .btn:disabled {
   background-color: rgba(53, 176, 167, 0.2) !important;

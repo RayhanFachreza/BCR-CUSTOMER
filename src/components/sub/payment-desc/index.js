@@ -1,29 +1,46 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import Axios from 'axios';
 import ArrowLeft from './assets/arrow-left.svg';
 import Rect from './assets/rect.svg';
 import Check from './assets/check.svg';
 import UserIcon from './assets/user-icon.svg';
 import UpDown from './assets/up-down.svg';
+import { currencyFormat } from '../../../helper';
 import './style.css';
 
 const PaymentDesc = () => {
   const [selected, setSelected] = useState();
-  const selectClick = (index) => {
-    setSelected(index)
-  };
-
+  const selectClick = (index) => { setSelected(index) };
   const [isToggled, setIsToggled] = useState(true);
-
   const styleToggled = {
     transform: isToggled ? 'rotate(180deg)' : '',
     transition: 'transform 500ms ease'
   };
+  const styleLink = {background: "#5CB85F"}
+  const mulaiSewa = localStorage.getItem("mulai_sewa");
+  const akhirSewa = localStorage.getItem("akhir_sewa");
+  const totalHari = localStorage.getItem("Jumlah_Hari")
+  const [detail, setDetail] = useState({});
+  let { id } = useParams();
+  const fetch = useRef(true);
+  const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
+  const getDetail = (id) => {
+    Axios.get(`${baseUrl}/car/${id}`)
+      .then((response) => {
+        setDetail(response.data)
+      })
+      .catch((error) => console.log(error));
+  };
 
-  const styleLink = {
-    background: "#5CB85F"
-  }
+  useEffect(() => {
+    if (fetch.current) {
+      fetch.current = false;
+      getDetail(id)
+    }
+  }, [id])
 
+  
   return (
     <section className="payment-desc">
       <div className="bg" />
@@ -63,19 +80,28 @@ const PaymentDesc = () => {
                   <h3>Detail Pesananmu</h3>
                   <div className="col-lg-3">
                     <h4>Nama/Tipe Mobil</h4>
-                    <div className="car-name">Innova</div>
+                    <div className="car-name">{detail.name}</div>
                   </div>
                   <div className="col-lg-3">
                     <h4>Kategori</h4>
-                    <div className="category">6 - 8 orang</div>
+                    <div className="category">
+                      {(() => {
+                          switch (detail.category) {
+                            case "small": return "2-4 orang";
+                            case "medium": return "4-6 orang";
+                            case "large": return "6-8 orang";
+                            default: return "-"
+                          }
+                      })()}
+                    </div>
                   </div>
                   <div className="col-lg-3">
                     <h4>Tanggal Mulai Sewa</h4>
-                    <div className="start-rent">2 Jun 2022</div>
+                    <div className="start-rent">{mulaiSewa}</div>
                   </div>
                   <div className="col-lg-3">
                     <h4>Tanggal Akhir Sewa</h4>
-                    <div className="finish-rent">8 Jun 2022</div>
+                    <div className="finish-rent">{akhirSewa}</div>
                   </div>
                 </div>
               </div>
@@ -136,10 +162,17 @@ const PaymentDesc = () => {
               </div>
               <div className="col-lg-5 col-md-12">
                 <div className="detail-payment">
-                  <h5>Innova</h5>
+                  <h5>{detail.name}</h5>
                   <div className="category">
                     <img src={UserIcon} alt="" />
-                    <p>6-8 orang</p>
+                    <p> {(() => {
+                          switch (detail.category) {
+                            case "small": return "2-4 orang";
+                            case "medium": return "4-6 orang";
+                            case "large": return "6-8 orang";
+                            default: return "-"
+                          }
+                      })()}</p>
                   </div>
                   <div className="calc">
                     <div className="total-calc">
@@ -152,7 +185,7 @@ const PaymentDesc = () => {
                           alt="see calculation"
                         />
                       </div>
-                      <h5>Rp 3.500.000</h5>
+                      <h5>Rp {currencyFormat(detail.price*totalHari)}</h5>
                     </div>
                     {
                       isToggled ?
@@ -160,8 +193,8 @@ const PaymentDesc = () => {
                           <h5 className="title">Harga</h5>
                           <ul>
                             <li>
-                              <p>Sewa Mobil Rp.500.000 x 7 Hari</p>
-                              <p>Rp 3.500.000</p>
+                              <p>Sewa Mobil Rp {currencyFormat(detail.price)} x {totalHari}</p>
+                              <p>Rp {currencyFormat(detail.price*totalHari)}</p>
                             </li>
                           </ul>
                           <h5 className="title">Biaya Lainnya</h5>
@@ -193,7 +226,7 @@ const PaymentDesc = () => {
                   </div>
                   <div className="result-calc">
                     <h4>Total</h4>
-                    <h4>Rp 3.500.000</h4>
+                    <h4><h5>Rp {currencyFormat(detail.price*totalHari)}</h5></h4>
                   </div>
                   <Link
                     style={selected ? styleLink : {}}
