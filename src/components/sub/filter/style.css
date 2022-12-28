@@ -43,6 +43,10 @@
   color: #3C3C3C;
 }
 
+input::placeholder {
+  font-size: 10px;
+}
+
 .form-control {
   font-family: 'Rubik';
   font-style: normal;
