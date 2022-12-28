@@ -48,6 +48,12 @@ const Header = () => {
                   <li>
                     <a href='#faq'>FAQ</a>
                   </li>
+                  <li className='buttonregist'>
+                  <Link
+                   to={'/sign-up'} 
+                   className="btn">Register
+                  </Link>
+                  </li>
                 </ul>
               </div>
               <div className="burger-icon" onClick={openSidebar}>

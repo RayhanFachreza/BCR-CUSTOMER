@@ -5,15 +5,49 @@ import { currencyFormat } from '../../../helper';
 import UserIcon from './assets/user-icon.svg';
 import placeholderImg from '../../../assets/images/placeholder-img.webp';
 import './style.css';
+import { DateRangePicker } from 'rsuite';
+import Button from 'react-bootstrap/Button';
+import 'rsuite/dist/rsuite.min.css';
+import moment from 'moment';
+import 'moment/locale/id'
+import Filter from '../filter';
+
+// import { differenceInDays } from 'date-fns'
+// import DateRangePicker from 'rsuite/DateRangePicker';
+
+
 
 const CarDesc = () => {
   const [detail, setDetail] = useState({});
+  const [dateRange, setDateRange] = useState(null)
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const { allowedMaxDays, beforeToday, combine } =  DateRangePicker;  
   let { id } = useParams();
-
   // const baseUrl = 'http://localhost:4000';
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
-
   const fetch = useRef(true);
+  moment.locale('id')
+  
+  const handleChange = (update) => {
+    // enable the button when the input changes
+    setButtonDisabled(false);
+    setDateRange(update);
+  };
+
+  const handleClose = () => {
+    setButtonDisabled(true)
+  } 
+  const handleSubmit= () => {
+    const totalhari = moment(dateRange[1]).diff(moment(dateRange[0]), 'days')
+    const mulaiSewa = moment(dateRange[0]).format('dddd, MMMM Do YYYY');
+    const akhirSewa = moment(dateRange[1]).format('dddd, MMMM Do YYYY');
+    console.log(totalhari)
+    window.localStorage.setItem('Jumlah_Hari', totalhari)
+    window.localStorage.setItem('mulai_sewa', mulaiSewa)
+    window.localStorage.setItem('akhir_sewa', akhirSewa)
+    window.location.href = `/payment/${id}`
+    //  `/find-car/${car.id}`
+  }
 
   const getDetail = (id) => {
     Axios.get(`${baseUrl}/car/${id}`)
@@ -29,14 +63,18 @@ const CarDesc = () => {
       getDetail(id)
     }
   }, [id])
+    
+  console.log(dateRange)
+
 
   return (
     <section>
       <div className="backButton">
-        <Link to={`/find-car`} className="btn">
+        <Link to={-1} className="btn">
           KEMBALI KE PENCARIAN MOBIL
         </Link>
       </div>
+      < Filter/>
       <div className="car-desc">
         <div className="container">
           <div className="car-desc-border">
@@ -94,12 +132,29 @@ const CarDesc = () => {
                           }
                         })()}</p>
                       </div>
+                      <div className="datebox">
+                        <h3>Tentukan lama sewa mobil (max. 7 hari)</h3>
+                        <div className="date">
+                          <DateRangePicker 
+                          // onChange={handleChange} 
+                          onChange={(update)=> handleChange(update)} 
+                          onClean={()=> handleClose ()}
+                           format="dd MMM yyy" size="lg" block placeholder="Pilih tanggal mulai dan tanggal akhir sewa"  showOneCalendar appearance="default" disabledDate={combine(allowedMaxDays(7),beforeToday())} />
+                        </div>
+                      </div>
+
                       <div className="price">
                         <h4>Total</h4>
                         <h4>Rp {currencyFormat(detail.price)}</h4>
                       </div>
+                      
+                      <Button variant="success" size="lg" onClick={() => handleSubmit()}  disabled={buttonDisabled} > 
+                        Lanjutkan Pembayaran
+                      </Button>
+                        
+                      
                       <div className="backButton2">
-                        <Link to={`/find-car`} className="btn">
+                        <Link to={-1} className="btn">
                           KEMBALI
                         </Link>
                       </div>

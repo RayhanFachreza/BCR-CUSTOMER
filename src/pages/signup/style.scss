@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vmax !important;
     position: fixed;
-    z-index: 9999 !important;
+    z-index: 0;
 }
 
 .signup-kiri {
@@ -12,6 +12,8 @@
     align-items: center !important;
     justify-content: center !important;
     background-color: #FFFFFF;
+    // asdasds
+    // asda
 }
 
 .signup-box {
@@ -26,6 +28,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.signup-konten .namaform {
+    margin-bottom: 13px;
 }
 
 /* 

@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vmax !important;
     position: fixed;
-    z-index: 9999 !important;
+    z-index: 0 !important;
 }
 
 .login-kiri {
@@ -32,6 +32,11 @@
 img.homelogo {
     margin-bottom: 32px;
 } */
+
+.form-control {
+    color: black;
+    font-weight: 500;
+}
 
 img.closelogo {
     width: 28px !important;

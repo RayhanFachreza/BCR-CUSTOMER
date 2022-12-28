@@ -1,10 +1,28 @@
 import React, { useRef, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import './style.css';
+// import Kategori from "../../../assets/images/kategori.svg"
+// import Status from "../../../assets/images/status.svg"
+// import Sewa from "../../../assets/images/sewa.svg"
 
 
 const Filter = (filterData) => {
   const [active, setActive] = useState(false);
+  const location = useLocation();
+  let {id} = useParams()
+
+  let placeholder1 = "Masukan Kapasitas Mobil" 
+  let placeholder2 = "Ketik nama/tipe mobil"
+  let placeholder3 = "Masukan Harga Sewa per Hari"
+  let placeholder4 = "Status"
+
+  if (location.pathname === `/find-car-result/${id}`) {
+    placeholder1 = "";
+    placeholder2 = "";
+    placeholder3 = "";
+    placeholder4 = "";
+  }
 
   const overlayActive = () => {
     document.body.style.overflow = "hidden";
@@ -13,10 +31,12 @@ const Filter = (filterData) => {
   const overlayDeactive = () => {
     document.body.style.overflow = "";
     setActive(false);
+    filterData.setHeroVisible(false)
+    // window.location.href='/find-car-result'
   };
-
+  
   const titleRef = useRef()
-
+  
   function handleBackClick() {
     titleRef.current.scrollIntoView({
       behavior: 'smooth',
@@ -24,13 +44,14 @@ const Filter = (filterData) => {
       inline: 'center'
     })
   };
-
-
+  
+  
   return (
     <section
       className="filter"
       ref={titleRef}
       onClick={handleBackClick}
+      
     >
       <div className="container">
         <div className={`overlay-bg-2 ${active ? 'overlay-active' : ''}`} onClick={overlayDeactive} />
@@ -48,8 +69,11 @@ const Filter = (filterData) => {
                         type="text"
                         onClick={overlayActive}
                         className="form-control"
-                        placeholder="Ketik nama/tipe mobil"
+                        // placeholder="Ketik nama/tipe mobil"
+                        placeholder={placeholder2}
                         ref={filterData.carName}
+                        disabled = {location.pathname === `/find-car-result/${id}`}
+                        // /find-car-result/${car.id}
                       />
                     </div>
                   </div>
@@ -71,9 +95,11 @@ const Filter = (filterData) => {
                       <option value="large">6 - 8 orang</option>
                     </select> */}
                     <Select
+                      isDisabled = {location.pathname === `/find-car-result/${id}`}
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder="Masukan Kapasitas Mobil"
+                      // placeholder="Masukan Kapasitas Mobil"
+                      placeholder={placeholder1}
                       onFocus={overlayActive}
                       ref={filterData.category}
                       onChange={(e) => filterData.category.current.value = e.value}
@@ -81,7 +107,8 @@ const Filter = (filterData) => {
                         { value: "small", label: '2 - 4 orang' },
                         { value: "medium", label: '4 - 6 orang' },
                         { value: "large", label: '6 - 8 orang' }
-                      ]} />
+                      ]}
+                      />
                   </div>
                 </div>
 
@@ -101,9 +128,12 @@ const Filter = (filterData) => {
                       <option value="large"> {'> Rp. 600.000'} </option>
                     </select> */}
                     <Select
+                      
+                      isDisabled = {location.pathname === `/find-car-result/${id}`}
+                      // placeholder="Masukan Harga Sewa per Hari"
+                      placeholder={placeholder3}
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder="Masukan Harga Sewa per Hari"
                       onFocus={overlayActive}
                       ref={filterData.priceRange}
                       onChange={(e) => filterData.priceRange.current.value = e.value}
@@ -128,9 +158,10 @@ const Filter = (filterData) => {
                       <option value="false">Disewa</option>
                     </select> */}
                     <Select
+                      isDisabled = {location.pathname === `/find-car-result/${id}`}
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder=""
+                      placeholder={placeholder4}
                       onFocus={overlayActive}
                       ref={filterData.statusOrder}
                       onChange={(e) => filterData.statusOrder.current.value = e.value}
@@ -141,18 +172,19 @@ const Filter = (filterData) => {
                   </div>
                 </div>
               </div>
-
+              {location.pathname !== `/find-car-result/${id}`  && 
               <div className="submit">
                 <div className="button">
-                  <button
+                  <button 
                     className="btn"
                     type="submit"
                     onClick={overlayDeactive}
                   >
                     Cari Mobil
                   </button>
-                </div>
-              </div>
+                </div> 
+              </div>}
+              
 
             </form>
           </div>
