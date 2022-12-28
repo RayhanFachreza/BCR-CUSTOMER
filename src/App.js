@@ -9,6 +9,7 @@ import Signup from './pages/signup';
 import Signin from './pages/signin';
 import Payment from './pages/payment';
 import BankConfirm from './pages/bank-confirm'
+// import FindCarResult from './pages/find-car-result';
 
 
 const WithAuth = () => {
@@ -42,7 +43,7 @@ const App = () => {
         {/* WithAuth  */}
         <Route element={<WithAuth/>} >
           <Route path="/find-car" element={<FindCar />} />
-          <Route path="/find-car/:id" element={<CarDetail />} />
+          <Route path="/find-car-result/:id" element={<CarDetail />} />
           <Route path="/payment/bank-confirm" element={<BankConfirm />} />
           <Route path="/payment/:id" element={<Payment />} />
         </Route>

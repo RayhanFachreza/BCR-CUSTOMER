@@ -25,6 +25,8 @@ const PaymentDesc = () => {
   let { id } = useParams();
   const fetch = useRef(true);
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
+  const Total = (detail.price*totalHari)
+
   const getDetail = (id) => {
     Axios.get(`${baseUrl}/car/${id}`)
       .then((response) => {
@@ -185,7 +187,7 @@ const PaymentDesc = () => {
                           alt="see calculation"
                         />
                       </div>
-                      <h5>Rp {currencyFormat(detail.price*totalHari)}</h5>
+                      <h5>Rp {currencyFormat(Total)}</h5>
                     </div>
                     {
                       isToggled ?
@@ -193,8 +195,8 @@ const PaymentDesc = () => {
                           <h5 className="title">Harga</h5>
                           <ul>
                             <li>
-                              <p>Sewa Mobil Rp {currencyFormat(detail.price)} x {totalHari}</p>
-                              <p>Rp {currencyFormat(detail.price*totalHari)}</p>
+                              <p>Sewa Mobil Rp {currencyFormat(Total)} x {totalHari}</p>
+                              <p>Rp {currencyFormat(Total)}</p>
                             </li>
                           </ul>
                           <h5 className="title">Biaya Lainnya</h5>
@@ -226,11 +228,12 @@ const PaymentDesc = () => {
                   </div>
                   <div className="result-calc">
                     <h4>Total</h4>
-                    <h4><h5>Rp {currencyFormat(detail.price*totalHari)}</h5></h4>
+                    <h4><h5>Rp {currencyFormat(Total)}</h5></h4>
                   </div>
                   <Link
                     style={selected ? styleLink : {}}
                     to={selected ? '/payment/bank-confirm' : "#"}
+                    onClick={() => window.localStorage.setItem('Total_Harga', Total)}
                   >
                     Bayar
                   </Link>

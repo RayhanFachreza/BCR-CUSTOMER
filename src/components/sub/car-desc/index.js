@@ -69,7 +69,7 @@ const CarDesc = () => {
   return (
     <section>
       <div className="backButton">
-        <Link to={`/find-car`} className="btn">
+        <Link to={-1} className="btn">
           KEMBALI KE PENCARIAN MOBIL
         </Link>
       </div>
@@ -153,7 +153,7 @@ const CarDesc = () => {
 
                       
                       <div className="backButton2">
-                        <Link to={`/find-car`} className="btn">
+                        <Link to={-1} className="btn">
                           KEMBALI
                         </Link>
                       </div>
