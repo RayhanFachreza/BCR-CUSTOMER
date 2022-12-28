@@ -17,15 +17,15 @@ const PaymentDesc = () => {
     transform: isToggled ? 'rotate(180deg)' : '',
     transition: 'transform 500ms ease'
   };
-  const styleLink = {background: "#5CB85F"}
+  const styleLink = { background: "#5CB85F" }
   const mulaiSewa = localStorage.getItem("mulai_sewa");
   const akhirSewa = localStorage.getItem("akhir_sewa");
-  const totalHari = localStorage.getItem("Jumlah_Hari")
+  const totalHari = localStorage.getItem("Jumlah_Hari");
   const [detail, setDetail] = useState({});
   let { id } = useParams();
   const fetch = useRef(true);
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
-  const Total = (detail.price*totalHari)
+  const Total = (detail.price * totalHari);
 
   const getDetail = (id) => {
     Axios.get(`${baseUrl}/car/${id}`)
@@ -40,9 +40,27 @@ const PaymentDesc = () => {
       fetch.current = false;
       getDetail(id)
     }
-  }, [id])
+  }, [id]);
 
-  
+
+    //POST customer order
+
+  // const [order, setOrder] = useState({});
+
+  // const postOrder = () => {
+  //   Axios.post(`${baseUrl}/order`, {
+  //     start_rent_at: (mulaiSewa),
+  //     finish_rent_at: (akhirSewa),
+  //     car_id: (getDetail)
+  //   })
+  //     .then((response) => {
+  //       setOrder(response.data)
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
+
+
+
   return (
     <section className="payment-desc">
       <div className="bg" />
@@ -88,12 +106,12 @@ const PaymentDesc = () => {
                     <h4>Kategori</h4>
                     <div className="category">
                       {(() => {
-                          switch (detail.category) {
-                            case "small": return "2-4 orang";
-                            case "medium": return "4-6 orang";
-                            case "large": return "6-8 orang";
-                            default: return "-"
-                          }
+                        switch (detail.category) {
+                          case "small": return "2-4 orang";
+                          case "medium": return "4-6 orang";
+                          case "large": return "6-8 orang";
+                          default: return "-"
+                        }
                       })()}
                     </div>
                   </div>
@@ -168,13 +186,13 @@ const PaymentDesc = () => {
                   <div className="category">
                     <img src={UserIcon} alt="" />
                     <p> {(() => {
-                          switch (detail.category) {
-                            case "small": return "2-4 orang";
-                            case "medium": return "4-6 orang";
-                            case "large": return "6-8 orang";
-                            default: return "-"
-                          }
-                      })()}</p>
+                      switch (detail.category) {
+                        case "small": return "2-4 orang";
+                        case "medium": return "4-6 orang";
+                        case "large": return "6-8 orang";
+                        default: return "-"
+                      }
+                    })()}</p>
                   </div>
                   <div className="calc">
                     <div className="total-calc">
@@ -228,7 +246,7 @@ const PaymentDesc = () => {
                   </div>
                   <div className="result-calc">
                     <h4>Total</h4>
-                    <h4><h5>Rp {currencyFormat(Total)}</h5></h4>
+                    <h4>Rp {currencyFormat(Total)}</h4>
                   </div>
                   <Link
                     style={selected ? styleLink : {}}

@@ -7,14 +7,9 @@ import placeholderImg from '../../../assets/images/placeholder-img.webp';
 import { DateRangePicker } from 'rsuite';
 import Button from 'react-bootstrap/Button';
 import moment from 'moment';
-import 'moment/locale/id'
+import 'moment/locale/id';
 import Filter from '../filter';
 import './style.css';
-
-
-// import { differenceInDays } from 'date-fns'
-// import DateRangePicker from 'rsuite/DateRangePicker';
-
 
 
 const CarDesc = () => {
@@ -52,7 +47,9 @@ const CarDesc = () => {
   const getDetail = (id) => {
     Axios.get(`${baseUrl}/car/${id}`)
       .then((response) => {
-        setDetail(response.data)
+        setDetail(response.data);
+        window.localStorage.setItem('car_name', response.data.name);
+        window.localStorage.setItem('car_price', response.data.price);
       })
       .catch((error) => console.log(error));
   };
@@ -62,9 +59,7 @@ const CarDesc = () => {
       fetch.current = false;
       getDetail(id)
     }
-  }, [id])
-
-  console.log(dateRange)
+  }, [id]);
 
 
   return (

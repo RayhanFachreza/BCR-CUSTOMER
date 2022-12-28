@@ -5,9 +5,14 @@ import Rect from './assets/rect.svg';
 import Copy from './assets/copy.svg';
 import Count1Day from '../count1day';
 import ConfirmUpload from '../confirm-upload';
+import { currencyFormat } from '../../../helper';
 import './style.css';
 
 const BankPayment = () => {
+  const totalHari = localStorage.getItem("Jumlah_Hari");
+  const carPrice = localStorage.getItem("car_price");
+  const Total = (carPrice * totalHari);
+
   let bank = (localStorage.getItem("bank"))
   let dataBank = [{}];
 
@@ -76,10 +81,10 @@ const BankPayment = () => {
   const hour = limitPayment.getHours();
   const min = limitPayment.getMinutes();
 
-  const [copyText, setCopyText] = useState("");
-  const handleCopy = () => {
-    navigator.clipboard.writeText(copyText)
-  };
+  // const textToCopy = "blablabla"
+  // const copyText = () => {
+  //   navigator.clipboard.writeText(textToCopy);
+  // };
 
   const [toggleState, setToggleState] = useState(1);
   const toggleTab = (index) => {
@@ -147,30 +152,22 @@ const BankPayment = () => {
                       <p>a.n Binar Car Rental</p>
                       <h4>Nomor Rekening</h4>
                       <div className="account">
-                        <p
-                          className="account-number"
-                          defaultValue={copyText}
-                          onChange={(e) => setCopyText(e.target.defaultValue)}
-                        >
+                        <p className="account-number">
                           {x.rek}
                         </p>
                         <button
-                          onClick={handleCopy}
+                          onClick={() => navigator.clipboard.writeText(x.rek)}
                         >
                           <img src={Copy} alt="copy-to-clipboard" />
                         </button>
                       </div>
                       <h4>Total Bayar</h4>
                       <div className="total-payment">
-                        <p
-                          className="price-to-pay"
-                          defaultValue={copyText}
-                          onChange={(e) => setCopyText(e.target.defaultValue)}
-                        >
-                          Rp 3.500.000
+                        <p className="price-to-pay">
+                          Rp {currencyFormat(Total)}
                         </p>
                         <button
-                          onClick={handleCopy}
+                          onClick={() => navigator.clipboard.writeText(document.querySelector(".price-to-pay").textContent)}
                         >
                           <img src={Copy} alt="copy-to-clipboard" />
                         </button>
