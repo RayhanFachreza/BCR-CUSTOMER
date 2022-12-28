@@ -1,13 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
+// import Pdf from 'react-to-pdf';
 import ArrowLeft from './assets/arrow-left.svg';
 import Rect from './assets/rect.svg';
+import { PDFExport } from '@progress/kendo-react-pdf';
 import Success from './assets/success.svg';
 import Download from './assets/download.svg';
-import Pict from './assets/fi_image.svg';
+import Invoice from '../invoice';
 import './style.css';
 
 const Ticket = () => {
+  let bank = (localStorage.getItem("bank"))
+  let dataBank = [{}];
+
+  switch (bank) {
+    case "BCA":
+      dataBank = [
+        { "desc": "BCA Transfer" }
+      ];
+      break;
+    case "BNI":
+      dataBank = [
+        { "desc": "BNI Transfer" }
+      ];
+      break;
+    case "Mandiri":
+      dataBank = [
+        { "desc": "Mandiri Transfer" }
+      ];
+      break;
+    default:
+      break;
+  };
+
+  const downloadPDF = useRef(null);
+
+  const handleDownloadPDF = (event) => {
+    downloadPDF.current.save();
+  }
+
   return (
     <section className="e-ticket">
       <div className="bg" />
@@ -20,9 +51,15 @@ const Ticket = () => {
                   <Link to={-1}>
                     <img src={ArrowLeft} alt="back to detail mobil" />
                   </Link>
-                  <h3>BCA Transfer</h3>
+                  {dataBank.map((x, key) => {
+                    return (
+                      <h3 key={key}>
+                        {x.desc}
+                      </h3>
+                    )
+                  })}
                 </div>
-                <h4>Order ID: xxxxxxxx</h4>
+                <h4>Order ID: 86754231</h4>
               </div>
               <div className="col-6">
                 <div className="state-payment">
@@ -44,21 +81,24 @@ const Ticket = () => {
           <h3>Pembayaran Berhasil!</h3>
           <h5>Tunjukkan invoice ini ke petugas BCR di titik temu.</h5>
           <div className="print-ticket">
-            <div className="invoice">
+            <div className="invoice-head">
               <div className="invoice-desc">
                 <h4>Invoice</h4>
                 <p>*no invoice</p>
               </div>
-              <div className="download-btn">
+              <div className="download-btn" onClick={handleDownloadPDF}>
                 <img src={Download} alt="" />
                 <h4>Unduh</h4>
               </div>
             </div>
             <div className="pdf-viewer">
-              <div className="pdf">
-                <img src={Pict} alt="" />
-                <p>PDF Viewer</p>
-              </div>
+              <PDFExport
+                fileName={"invoice"}
+                ref={downloadPDF}
+                paperSize="A4"
+              >
+                <Invoice />
+              </PDFExport>
             </div>
           </div>
         </div>

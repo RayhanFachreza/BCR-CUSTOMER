@@ -158,7 +158,7 @@ const PaymentDesc = () => {
                           <ul>
                             <li>
                               <p>Sewa Mobil Rp.500.000 x 7 Hari</p>
-                              <p>Rp 3.500.000</p>
+                              <h5>Rp 3.500.000</h5>
                             </li>
                           </ul>
                           <h5 className="title">Biaya Lainnya</h5>

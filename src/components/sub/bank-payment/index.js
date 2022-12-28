@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import ArrowLeft from './assets/arrow-left.svg';
 import Rect from './assets/rect.svg';
 import Copy from './assets/copy.svg';
-import Upload from './assets/upload.png';
+import Count1Day from '../count1day';
+import ConfirmUpload from '../confirm-upload';
 import './style.css';
 
 const BankPayment = () => {
@@ -35,7 +36,7 @@ const BankPayment = () => {
           "mb": "M-Banking BNI",
           "klik": "BNI Klik",
           "ib": "Internet Banking",
-          "rek": "54104257877",
+          "rek": "65162365515",
         }
       ];
       break;
@@ -49,13 +50,31 @@ const BankPayment = () => {
           "mb": "M-Banking Mandiri",
           "klik": "Mandiri Klik",
           "ib": "Internet Banking",
-          "rek": "54104257877",
+          "rek": "76562662662",
         }
       ];
       break;
     default:
       break;
-  }
+  };
+
+  const d_names = ["Minggu", "Senin", "Selasa",
+    "Rabu", "Kamis", "Jumat", "Sabtu"];
+
+  const m_names = ["Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli", "Agustus", "September",
+    "Oktober", "November", "Desember"];
+
+  const today = new Date();
+  const limitPayment = new Date();
+  limitPayment.setDate(today.getDate() + 1);
+
+  const day = limitPayment.getDay();
+  const date = limitPayment.getDate();
+  const month = limitPayment.getMonth();
+  const year = limitPayment.getFullYear();
+  const hour = limitPayment.getHours();
+  const min = limitPayment.getMinutes();
 
   const [copyText, setCopyText] = useState("");
   const handleCopy = () => {
@@ -66,6 +85,8 @@ const BankPayment = () => {
   const toggleTab = (index) => {
     setToggleState(index);
   };
+
+  const [confirm, setConfirm] = useState("confirm");
 
   return (
     <section className="bank-payment">
@@ -107,11 +128,15 @@ const BankPayment = () => {
                     <div className="payment-deadline">
                       <div className="deadline-date">
                         <h3>Selesaikan Pembayaran Sebelum</h3>
-                        <p>Rabu, 19 Mei 2022 jam 13.00 WIB</p>
+                        <p>
+                          {
+                            d_names[day] + ", " + (parseInt(date) < 10 ? "0" + date : date) + " " + m_names[month] + " " + year
+                          } jam {
+                            (parseInt(hour) < 10 ? "0" + hour : hour) + "." + (parseInt(min) < 10 ? "0" + min : min)
+                          } WIB
+                        </p>
                       </div>
-                      <div className="countdown">
-                        <span>23</span>:<span>55</span>:<span>09</span>
-                      </div>
+                      <Count1Day />
                     </div>
                     <div className="transfer-detail">
                       <h3>Lakukan Transfer Ke</h3>
@@ -237,28 +262,16 @@ const BankPayment = () => {
                   </div>
                   <div className="col-lg-5 col-md-12">
                     <div className="confirm-payment">
-                      <h5>Klik konfirmasi pembayaran untuk mempercepat proses pengecekan</h5>
-                      <div className="confirm-count">
-                        <h3>Konfirmasi Pembayaran</h3>
-                        <div className="countdown">
-                          <span>09</span>:<span>55</span>
+                      {confirm === "confirm" ?
+                        <div className="confirm-click">
+                          <h5>Klik konfirmasi pembayaran untuk mempercepat proses pengecekan</h5>
+                          <button onClick={() => setConfirm("confirm-payment")}>
+                            Konfirmasi Pembayaran
+                          </button>
                         </div>
-                      </div>
-                      <p>Terima kasih telah melakukan konfirmasi pembayaran. Pembayaranmu akan segera kami cek tunggu kurang lebih 10 menit untuk mendapatkan konfirmasi.</p>
-                      <h4>Upload Bukti Pembayaran</h4>
-                      <p>Untuk membantu kami lebih cepat melakukan pengecekan. Kamu bisa upload bukti bayarmu</p>
-                      <div className="upload-img">
-                        <img src={Upload} alt="upload" />
-                      </div>
-                      <button>
-                        Konfirmasi Pembayaran
-                      </button>
-                      <button>
-                        Upload
-                      </button>
-                      <Link to={'/payment/bank-confirm/e-ticket'}>
-                        Konfirmasi
-                      </Link>
+                        :
+                        <ConfirmUpload />
+                      }
                     </div>
                   </div>
                 </div>
