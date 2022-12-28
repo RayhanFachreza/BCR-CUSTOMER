@@ -26,6 +26,8 @@ const CarDesc = () => {
   // const baseUrl = 'http://localhost:4000';
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
   const fetch = useRef(true);
+  moment.locale('id')
+  
   const handleChange = (update) => {
     // enable the button when the input changes
     setButtonDisabled(false);
@@ -35,7 +37,6 @@ const CarDesc = () => {
   const handleClose = () => {
     setButtonDisabled(true)
   } 
-  moment.locale('id')
   const handleSubmit= () => {
     const totalhari = moment(dateRange[1]).diff(moment(dateRange[0]), 'days')
     const mulaiSewa = moment(dateRange[0]).format('dddd, MMMM Do YYYY');
@@ -150,7 +151,7 @@ const CarDesc = () => {
                       <Button variant="success" size="lg" onClick={() => handleSubmit()}  disabled={buttonDisabled} > 
                         Lanjutkan Pembayaran
                       </Button>
-
+                        
                       
                       <div className="backButton2">
                         <Link to={-1} className="btn">

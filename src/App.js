@@ -8,12 +8,12 @@ import CarDetail from './pages/car-detail';
 import Signup from './pages/signup';
 import Signin from './pages/signin';
 import Payment from './pages/payment';
-import BankConfirm from './pages/bank-confirm'
-// import FindCarResult from './pages/find-car-result';
+import BankConfirm from './pages/bank-confirm';
+import ETicket from './pages/e-ticket';
+
 
 
 const WithAuth = () => {
-
   const isAuth = window.localStorage.getItem('access_token');
   return (
     <>
@@ -46,6 +46,7 @@ const App = () => {
           <Route path="/find-car-result/:id" element={<CarDetail />} />
           <Route path="/payment/bank-confirm" element={<BankConfirm />} />
           <Route path="/payment/:id" element={<Payment />} />
+          <Route path="/payment/bank-confirm/e-ticket" element={<ETicket />} />
         </Route>
       </Routes>
       {location.pathname !== '/sign-in'  && location.pathname !== '/sign-up' &&  <Footer/>}  

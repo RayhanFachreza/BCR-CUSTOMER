@@ -313,6 +313,7 @@
   font-size: 14px;
   line-height: 20px;
   color: #151515;
+  margin: 0 !important;
 }
 
 .payment-desc .detail-payment .calc ul h6 {

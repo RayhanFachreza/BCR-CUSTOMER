@@ -195,8 +195,8 @@ const PaymentDesc = () => {
                           <h5 className="title">Harga</h5>
                           <ul>
                             <li>
-                              <p>Sewa Mobil Rp {currencyFormat(Total)} x {totalHari}</p>
-                              <p>Rp {currencyFormat(Total)}</p>
+                              <p>Sewa Mobil Rp {currencyFormat(detail.price)} x {totalHari}</p>
+                              <p>Rp {currencyFormat(detail.price*totalHari)}</p>
                             </li>
                           </ul>
                           <h5 className="title">Biaya Lainnya</h5>
