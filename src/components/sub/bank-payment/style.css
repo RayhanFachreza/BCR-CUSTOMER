@@ -42,6 +42,7 @@
   justify-content: right;
   align-items: center;
   padding-right: 15px;
+  padding-top: 4px;
 }
 
 .bank-payment .state-payment .one {
@@ -381,5 +382,11 @@
     justify-content: center;
     align-items: center;
     padding-top: 20px;
+  }
+
+  .bank-payment .bank-detail .payment-instr .bloc-tabs .tabs.active-tabs {
+    font-weight: 700;
+    border-bottom: 1px solid #5CB85F;
+    font-size: 13px;
   }
 }

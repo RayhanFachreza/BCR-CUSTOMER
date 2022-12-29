@@ -16,6 +16,7 @@
 .filter-form {
   display: flex;
   padding-left: 0;
+  padding-right: 0;
 }
 
 .filter-form .form {
@@ -81,6 +82,10 @@ input::placeholder {
   font-size: 12px;
   line-height: 18px;
   color: #3C3C3C;
+}
+
+.submit {
+  margin-right: 15px !important;
 }
 
 .button button {

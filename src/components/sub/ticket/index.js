@@ -46,7 +46,7 @@ const Ticket = () => {
         <div className="payment-nav">
           <div className="container">
             <div className="row">
-              <div className="col-6">
+              <div className="col-md-4">
                 <div className="back-button">
                   <Link to={-1}>
                     <img src={ArrowLeft} alt="back to detail mobil" />
@@ -61,7 +61,7 @@ const Ticket = () => {
                 </div>
                 <h4>Order ID: 86754231</h4>
               </div>
-              <div className="col-6">
+              <div className="col-md-8">
                 <div className="state-payment">
                   <div className="one">1</div>
                   <h5>Pilih Metode</h5>
@@ -84,7 +84,7 @@ const Ticket = () => {
             <div className="invoice-head">
               <div className="invoice-desc">
                 <h4>Invoice</h4>
-                <p>*no invoice</p>
+                <p>*invoice number</p>
               </div>
               <div className="download-btn" onClick={handleDownloadPDF}>
                 <img src={Download} alt="" />

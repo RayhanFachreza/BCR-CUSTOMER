@@ -31,6 +31,7 @@
   justify-content: right;
   align-items: center;
   padding-right: 15px;
+  padding-top: 4px;
 }
 
 .payment-desc .state-payment .one {
