@@ -7,6 +7,8 @@ import Check from './assets/check.svg';
 import UserIcon from './assets/user-icon.svg';
 import UpDown from './assets/up-down.svg';
 import { currencyFormat } from '../../../helper';
+import moment from 'moment';
+import 'moment/locale/id';
 import './style.css';
 
 const PaymentDesc = () => {
@@ -21,16 +23,23 @@ const PaymentDesc = () => {
   const mulaiSewa = localStorage.getItem("mulai_sewa");
   const akhirSewa = localStorage.getItem("akhir_sewa");
   const totalHari = localStorage.getItem("Jumlah_Hari");
+  const startRent = localStorage.getItem("start_rent");
+  const endRent = localStorage.getItem("end_rent");
+  const token = localStorage.getItem("access_token");
+  const id_car = localStorage.getItem('id_car');
   const [detail, setDetail] = useState({});
   let { id } = useParams();
   const fetch = useRef(true);
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
   const Total = (detail.price * totalHari);
+  moment.locale('id');
+
 
   const getDetail = (id) => {
     Axios.get(`${baseUrl}/car/${id}`)
       .then((response) => {
-        setDetail(response.data)
+        setDetail(response.data);
+        localStorage.setItem('id_car', response.data.id);
       })
       .catch((error) => console.log(error));
   };
@@ -43,22 +52,23 @@ const PaymentDesc = () => {
   }, [id]);
 
 
-    //POST customer order
-
-  // const [order, setOrder] = useState({});
-
-  // const postOrder = () => {
-  //   Axios.post(`${baseUrl}/order`, {
-  //     start_rent_at: (mulaiSewa),
-  //     finish_rent_at: (akhirSewa),
-  //     car_id: (getDetail)
-  //   })
-  //     .then((response) => {
-  //       setOrder(response.data)
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
-
+  const postCustomerOrder = async () => {
+    try {
+      const response = await Axios.post(`${baseUrl}/order`, {
+        start_rent_at: startRent,
+        finish_rent_at: endRent,
+        car_id: id_car
+      }, {
+        headers: {
+          'access_token': token
+        }
+      });
+      window.localStorage.setItem('order_id', response.data.id);
+      window.localStorage.setItem('Total_Harga', Total)
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
 
   return (
@@ -128,7 +138,6 @@ const PaymentDesc = () => {
             </div>
           </div>
         </div>
-
 
         <div className="payment-detail">
           <div className="container">
@@ -251,7 +260,7 @@ const PaymentDesc = () => {
                   <Link
                     style={selected ? styleLink : {}}
                     to={selected ? '/payment/bank-confirm' : "#"}
-                    onClick={() => window.localStorage.setItem('Total_Harga', Total)}
+                    onClick={postCustomerOrder}
                   >
                     Bayar
                   </Link>

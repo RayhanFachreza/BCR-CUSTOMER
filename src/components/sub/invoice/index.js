@@ -13,6 +13,7 @@ const Invoice = () => {
   const carName = localStorage.getItem("car_name");
   const carPrice = localStorage.getItem("car_price");
   const Total = (carPrice * totalHari);
+  const orderID = localStorage.getItem("order_id");
   let bank = (localStorage.getItem("bank"))
   let dataBank = [{}];
 
@@ -83,7 +84,7 @@ const Invoice = () => {
               <p>Status</p>
             </div>
             <div className="col-9">
-              <p>: 684981494</p>
+              <p>: {year}-{orderID}</p>
               {dataBank.map((x, key) => {
                 return (
                   <p key={key}>: {x.desc}</p>
@@ -104,7 +105,7 @@ const Invoice = () => {
               <p>Contact Number</p>
             </div>
             <div className="col-9">
-              <p>: {namaCustomer}</p>
+              <p>: {namaCustomer === null ? "Customer" : namaCustomer}</p>
               <p>: {emailCustomer}</p>
               <p>: +6281234567890</p>
             </div>

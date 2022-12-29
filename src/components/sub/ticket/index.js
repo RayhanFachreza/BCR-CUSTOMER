@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-// import Pdf from 'react-to-pdf';
 import ArrowLeft from './assets/arrow-left.svg';
 import Rect from './assets/rect.svg';
 import { PDFExport } from '@progress/kendo-react-pdf';
@@ -10,6 +9,9 @@ import Invoice from '../invoice';
 import './style.css';
 
 const Ticket = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const orderID = localStorage.getItem("order_id");
   let bank = (localStorage.getItem("bank"))
   let dataBank = [{}];
 
@@ -59,7 +61,7 @@ const Ticket = () => {
                     )
                   })}
                 </div>
-                <h4>Order ID: 86754231</h4>
+                <h4>Order ID: {year}-{orderID}</h4>
               </div>
               <div className="col-md-8">
                 <div className="state-payment">

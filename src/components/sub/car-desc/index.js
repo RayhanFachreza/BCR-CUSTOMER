@@ -18,13 +18,11 @@ const CarDesc = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const { allowedMaxDays, beforeToday, combine } = DateRangePicker;
   let { id } = useParams();
-  // const baseUrl = 'http://localhost:4000';
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
   const fetch = useRef(true);
   moment.locale('id')
 
   const handleChange = (update) => {
-    // enable the button when the input changes
     setButtonDisabled(false);
     setDateRange(update);
   };
@@ -34,14 +32,15 @@ const CarDesc = () => {
   }
   const handleSubmit = () => {
     const totalhari = moment(dateRange[1]).diff(moment(dateRange[0]), 'days')
-    const mulaiSewa = moment(dateRange[0]).format('dddd, MMMM Do YYYY');
-    const akhirSewa = moment(dateRange[1]).format('dddd, MMMM Do YYYY');
+    const mulaiSewa = moment(dateRange[0]).format('dddd, DD MMMM YYYY');
+    const akhirSewa = moment(dateRange[1]).format('dddd, DD MMMM YYYY');
     console.log(totalhari)
+    window.localStorage.setItem('start_rent', dateRange[0])
+    window.localStorage.setItem('end_rent', dateRange[1])
     window.localStorage.setItem('Jumlah_Hari', totalhari)
     window.localStorage.setItem('mulai_sewa', mulaiSewa)
     window.localStorage.setItem('akhir_sewa', akhirSewa)
     window.location.href = `/payment/${id}`
-    //  `/find-car/${car.id}`
   }
 
   const getDetail = (id) => {
@@ -143,7 +142,6 @@ const CarDesc = () => {
                       <Button variant="success" size="lg" onClick={() => handleSubmit()} disabled={buttonDisabled} >
                         Lanjutkan Pembayaran
                       </Button>
-
 
                       <div className="backButton2">
                         <Link to={-1} className="btn">

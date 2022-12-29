@@ -9,6 +9,7 @@ import { currencyFormat } from '../../../helper';
 import './style.css';
 
 const BankPayment = () => {
+  const orderID = localStorage.getItem("order_id");
   const totalHari = localStorage.getItem("Jumlah_Hari");
   const carPrice = localStorage.getItem("car_price");
   const Total = (carPrice * totalHari);
@@ -81,11 +82,6 @@ const BankPayment = () => {
   const hour = limitPayment.getHours();
   const min = limitPayment.getMinutes();
 
-  // const textToCopy = "blablabla"
-  // const copyText = () => {
-  //   navigator.clipboard.writeText(textToCopy);
-  // };
-
   const [toggleState, setToggleState] = useState(1);
   const toggleTab = (index) => {
     setToggleState(index);
@@ -109,7 +105,7 @@ const BankPayment = () => {
                       </Link>
                       <h3>{x.desc}</h3>
                     </div>
-                    <h4>Order ID: 86754231</h4>
+                    <h4>Order ID: {year}-{orderID}</h4>
                   </div>
                   <div className="col-md-8">
                     <div className="state-payment">
