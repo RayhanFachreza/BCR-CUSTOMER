@@ -7,14 +7,14 @@
 }
 
 .rs-btn-sm {
-  width: 685% !important;
+  width: 265px !important;
   background-color: #35B0A7 !important;
   border-radius: 2px !important;
 }
 
 .rs-btn-primary.rs-btn-disabled,
 .rs-btn-primary:disabled {
-  width: 685% !important;
+  width: 265px !important;
   background-color: #35B0A7 !important;
   border-radius: 2px !important;
 }
