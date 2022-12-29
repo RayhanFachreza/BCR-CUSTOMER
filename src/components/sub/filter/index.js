@@ -6,8 +6,10 @@ import './style.css';
 
 const Filter = (filterData) => {
   const [active, setActive] = useState(false);
+  const [edit, setEdit] = useState(false)
   const location = useLocation();
   let { id } = useParams()
+  
 
   let placeholder1 = "Masukan Kapasitas Mobil"
   let placeholder2 = "Ketik nama/tipe mobil"
@@ -29,7 +31,12 @@ const Filter = (filterData) => {
     document.body.style.overflow = "";
     setActive(false);
     filterData.setHeroVisible(false)
+    setEdit(!edit);
   };
+
+  // const handleEdit = () => {
+
+  // }
 
   const titleRef = useRef()
 
@@ -163,7 +170,7 @@ const Filter = (filterData) => {
                       type="submit"
                       onClick={overlayDeactive}
                     >
-                      Cari Mobil
+                      Cari Mobil 
                     </button>
                   </div>
                 </div>}

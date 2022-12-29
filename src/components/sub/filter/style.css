@@ -88,6 +88,20 @@ input::placeholder {
   margin-right: 15px !important;
 }
 
+.submit .btn-active {
+  background-color: white;
+  color: #0D28A6;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  width: 70px;
+  height: 36px;
+  border: 1px solid #0D28A6;
+  border-radius: 2px;
+  margin-left: -20px !important;
+}
+
 .button button {
   font-family: 'Arial';
   font-style: normal;
@@ -110,6 +124,9 @@ input::placeholder {
 
 .button .btn {
   margin: 0;
+  width: 92px !important;
+  height: 36px !important;
+  font-size: 80%;
 }
 
 .overlay-bg-2 {
