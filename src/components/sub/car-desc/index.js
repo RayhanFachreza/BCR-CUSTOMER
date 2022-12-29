@@ -65,9 +65,6 @@ const CarDesc = () => {
   return (
     <section>
       <div className="backButton">
-        <Link to={-1} className="btn">
-          KEMBALI KE PENCARIAN MOBIL
-        </Link>
       </div>
       < Filter />
       <div className="car-desc">
