@@ -1,10 +1,27 @@
 import React, { useRef, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import './style.css';
 
 
 const Filter = (filterData) => {
   const [active, setActive] = useState(false);
+  const [edit, setEdit] = useState(false)
+  const location = useLocation();
+  let { id } = useParams()
+  
+
+  let placeholder1 = "Masukan Kapasitas Mobil"
+  let placeholder2 = "Ketik nama/tipe mobil"
+  let placeholder3 = "Masukan Harga Sewa per Hari"
+  let placeholder4 = "Status"
+
+  if (location.pathname === `/find-car-result/${id}`) {
+    placeholder1 = "";
+    placeholder2 = "";
+    placeholder3 = "";
+    placeholder4 = "";
+  }
 
   const overlayActive = () => {
     document.body.style.overflow = "hidden";
@@ -13,7 +30,13 @@ const Filter = (filterData) => {
   const overlayDeactive = () => {
     document.body.style.overflow = "";
     setActive(false);
+    filterData.setHeroVisible(false)
+    setEdit(!edit);
   };
+
+  // const handleEdit = () => {
+
+  // }
 
   const titleRef = useRef()
 
@@ -25,6 +48,10 @@ const Filter = (filterData) => {
     })
   };
 
+  const styleForm = {
+    width: "100%",
+    padding_right: 0,
+  };
 
   return (
     <section
@@ -37,9 +64,10 @@ const Filter = (filterData) => {
         <div className={`filter-border ${active ? 'overlay-active' : ''}`}>
           <div className="row">
             <form className="filter-form" onSubmit={filterData.getData}>
-
-              <div className="form">
-
+              <div
+                style={location.pathname === `/find-car-result/${id}` ? styleForm : {}}
+                className="form"
+              >
                 <div className="col-lg-3">
                   <div className="form-border">
                     <div className="mb-3">
@@ -48,32 +76,33 @@ const Filter = (filterData) => {
                         type="text"
                         onClick={overlayActive}
                         className="form-control"
-                        placeholder="Ketik nama/tipe mobil"
+                        placeholder={placeholder2}
+                        styles={{
+                          placeholder: (base) => ({
+                            ...base,
+                            fontSize: '10px'
+                          })
+                        }}
                         ref={filterData.carName}
+                        disabled={location.pathname === `/find-car-result/${id}`}
                       />
                     </div>
                   </div>
                 </div>
-
                 <div className="col-lg-3">
                   <div className="form-border">
                     <label className="form-label">Kategori</label>
-                    {/* <select
-                      className="form-select"
-                      onClick={overlayActive}
-                      ref={filterData.category}
-                    >
-                      <option value="">
-                        Masukan Kapasitas Mobil
-                      </option>
-                      <option value="small">2 - 4 orang</option>
-                      <option value="medium">4 - 6 orang</option>
-                      <option value="large">6 - 8 orang</option>
-                    </select> */}
                     <Select
+                      isDisabled={location.pathname === `/find-car-result/${id}`}
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder="Masukan Kapasitas Mobil"
+                      placeholder={placeholder1}
+                      styles={{
+                        placeholder: (base) => ({
+                          ...base,
+                          fontSize: '10px'
+                        })
+                      }}
                       onFocus={overlayActive}
                       ref={filterData.category}
                       onChange={(e) => filterData.category.current.value = e.value}
@@ -81,29 +110,24 @@ const Filter = (filterData) => {
                         { value: "small", label: '2 - 4 orang' },
                         { value: "medium", label: '4 - 6 orang' },
                         { value: "large", label: '6 - 8 orang' }
-                      ]} />
+                      ]}
+                    />
                   </div>
                 </div>
-
                 <div className="col-lg-3">
                   <div className="form-border">
                     <label className="form-label">Harga</label>
-                    {/* <select
-                      className="form-select"
-                      onClick={overlayActive}
-                      ref={filterData.priceRange}
-                    >
-                      <option value="">
-                        Masukan Harga Sewa per Hari
-                      </option>
-                      <option value="small"> {'< Rp. 400.000'} </option>
-                      <option value="medium"> Rp. 400.000 - Rp. 600.000 </option>
-                      <option value="large"> {'> Rp. 600.000'} </option>
-                    </select> */}
                     <Select
+                      isDisabled={location.pathname === `/find-car-result/${id}`}
+                      placeholder={placeholder3}
+                      styles={{
+                        placeholder: (base) => ({
+                          ...base,
+                          fontSize: '10px'
+                        })
+                      }}
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder="Masukan Harga Sewa per Hari"
                       onFocus={overlayActive}
                       ref={filterData.priceRange}
                       onChange={(e) => filterData.priceRange.current.value = e.value}
@@ -114,23 +138,20 @@ const Filter = (filterData) => {
                       ]} />
                   </div>
                 </div>
-
                 <div className="col-lg-3">
                   <div className="form-border">
                     <label className="form-label">Status</label>
-                    {/* <select
-                      className="form-select"
-                      onClick={overlayActive}
-                      ref={filterData.statusOrder}
-                    >
-                      <option />
-                      <option value="true">Tersedia</option>
-                      <option value="false">Disewa</option>
-                    </select> */}
                     <Select
+                      isDisabled={location.pathname === `/find-car-result/${id}`}
                       className="select-form"
                       classNamePrefix="select"
-                      placeholder=""
+                      placeholder={placeholder4}
+                      styles={{
+                        placeholder: (base) => ({
+                          ...base,
+                          fontSize: '10px'
+                        })
+                      }}
                       onFocus={overlayActive}
                       ref={filterData.statusOrder}
                       onChange={(e) => filterData.statusOrder.current.value = e.value}
@@ -141,19 +162,18 @@ const Filter = (filterData) => {
                   </div>
                 </div>
               </div>
-
-              <div className="submit">
-                <div className="button">
-                  <button
-                    className="btn"
-                    type="submit"
-                    onClick={overlayDeactive}
-                  >
-                    Cari Mobil
-                  </button>
-                </div>
-              </div>
-
+              {location.pathname !== `/find-car-result/${id}` &&
+                <div className="submit">
+                  <div className="button">
+                    <button
+                      className="btn"
+                      type="submit"
+                      onClick={overlayDeactive}
+                    >
+                      Cari Mobil 
+                    </button>
+                  </div>
+                </div>}
             </form>
           </div>
         </div>

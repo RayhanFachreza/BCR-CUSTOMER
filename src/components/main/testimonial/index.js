@@ -37,7 +37,8 @@ const Testimonial = () => {
           <h3>Testimonial</h3>
           <h4>Berbagai review positif dari para pelanggan kami</h4>
         </div>
-        <ReactOwlCarousel className="owl-carousel" {...options}>
+      </div>
+      <ReactOwlCarousel className="owl-carousel" {...options}>
           <div className="row">
             <div className="col-lg-12">
               <div className="card-item">
@@ -114,7 +115,6 @@ const Testimonial = () => {
             </div>
           </div>
         </ReactOwlCarousel>
-      </div>
     </section>
   )
 }

@@ -8,11 +8,11 @@ import noCar from './assets/no-car.webp'
 import placeholderImg from '../../../assets/images/placeholder-img.webp'
 import './style.css';
 
-const FindResult = () => {
+const FindResult = ({setHeroVisible}) => {
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [emptyData, setEmptyData] = useState(false);
-
+  
   const baseUrl = 'https://bootcamp-rent-cars.herokuapp.com/customer';
 
   const getCars = () => {
@@ -85,6 +85,7 @@ const FindResult = () => {
     category,
     priceRange,
     statusOrder,
+    setHeroVisible,
   };
 
   return (
@@ -124,7 +125,7 @@ const FindResult = () => {
                               <h4 className='price'>Rp {currencyFormat(car.price)} / hari</h4>
                               <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                 incididunt ut labore et dolore magna aliqua. </p>
-                              <Link className="btn" to={`/find-car/${car.id}`} >
+                              <Link className="btn" to={`/find-car-result/${car.id}`} >
                                 Pilih Mobil
                               </Link>
                             </div>
@@ -139,7 +140,7 @@ const FindResult = () => {
           )}
           {emptyData &&
             <div className="noData">
-              <img src={noCar} />
+              <img src={noCar} alt=".." />
               <h3>Mobil yang kamu cari tidak ditemukan</h3>
               <h4>"Coba ubah kata kunci atau filter yang kamu gunakan"</h4>
             </div>}
