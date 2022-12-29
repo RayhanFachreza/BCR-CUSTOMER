@@ -156,7 +156,10 @@ const BankPayment = () => {
                           {x.rek}
                         </p>
                         <button
-                          onClick={() => navigator.clipboard.writeText(x.rek)}
+                          onClick={() => {
+                            navigator.clipboard.writeText(x.rek);
+                            alert('Text copied to clipboard')
+                          }}
                         >
                           <img src={Copy} alt="copy-to-clipboard" />
                         </button>
@@ -167,7 +170,10 @@ const BankPayment = () => {
                           Rp {currencyFormat(Total)}
                         </p>
                         <button
-                          onClick={() => navigator.clipboard.writeText(document.querySelector(".price-to-pay").textContent)}
+                          onClick={() => {
+                            navigator.clipboard.writeText(document.querySelector(".price-to-pay").textContent);
+                            alert('Text copied to clipboard')
+                          }}
                         >
                           <img src={Copy} alt="copy-to-clipboard" />
                         </button>

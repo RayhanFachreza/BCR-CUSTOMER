@@ -41,6 +41,11 @@ const Filter = (filterData) => {
     })
   };
 
+  const styleForm = {
+    width: "100%",
+    padding_right: 0,
+  };
+
   return (
     <section
       className="filter"
@@ -52,7 +57,10 @@ const Filter = (filterData) => {
         <div className={`filter-border ${active ? 'overlay-active' : ''}`}>
           <div className="row">
             <form className="filter-form" onSubmit={filterData.getData}>
-              <div className="form">
+              <div
+                style={location.pathname === `/find-car-result/${id}` ? styleForm : {}}
+                className="form"
+              >
                 <div className="col-lg-3">
                   <div className="form-border">
                     <div className="mb-3">

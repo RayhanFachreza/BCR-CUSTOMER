@@ -42,6 +42,7 @@
   justify-content: right;
   align-items: center;
   padding-right: 15px;
+  padding-top: 4px;
 }
 
 .e-ticket .state-payment .one,
@@ -178,4 +179,31 @@
   justify-content: center;
   padding: 10px;
   background: #EEEEEE;
+}
+
+@media (max-width:990px) {
+  .e-ticket .ticket .print-ticket {
+    width: 100%;
+  }
+}
+
+@media (max-width:767px) {
+  .e-ticket .bg {
+    height: 200px;
+  }
+
+  .e-ticket .payment-nav {
+    width: 100%;
+    margin-top: -100px;
+  }
+
+  .e-ticket .state-payment {
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+  }
+
+  .e-ticket .ticket .print-ticket .pdf-viewer {
+    display: none;
+  }
 }
