@@ -1,13 +1,24 @@
-Challenge Platinum Kelompok 2 Frontend Wave 4
+## Challenge Platinum Kelompok 2 Frontend Wave 4
+## Lists task customer
 
-Task Rayhan F = {
-  - halaman sign up
-  - halaman sign in
-  - halaman car detail
-}
+### Nama : Rayhan F
 
-Task Eko Wahyu R = {
-  - halaman payment
-  - halaman bank confirm
-  - halaman e-ticket
-}
+* Halaman Sign up
+* Halaman Sign in
+* Halaman Car Detail
+* Implement Date Picker
+* Maping Data Halaman Payment
+
+### Nama : Eko Wahyu R
+
+* Halaman Payment
+* Implement Pilih Bank
+* Implement Customer Order
+* Halaman Bank Confirm
+* Maping Data Halaman Bank Confirm
+* Implement Countdown Timer
+* Fitur Tabs
+* Implement Upload Image
+* Halaman E-ticket
+* Maping Data Halaman E-ticket
+* Implement PDF view & download
