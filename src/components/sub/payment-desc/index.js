@@ -64,7 +64,7 @@ const PaymentDesc = () => {
         }
       });
       window.localStorage.setItem('order_id', response.data.id);
-      window.localStorage.setItem('Total_Harga', Total)
+      window.localStorage.setItem('Total_Harga', Total);
     } catch (error) {
       console.error(error);
     }
