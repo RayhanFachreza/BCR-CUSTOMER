@@ -9,13 +9,38 @@ const Header = () => {
   const location = useLocation();
   const show = location.pathname === '/' ? true : false;
   const [active, setActive] = useState(false);
+  const accessToken = localStorage.getItem('access_token');
+
+  
   const openSidebar = () => {
     setActive(true);
   };
   const closeSidebar = () => {
     setActive(false);
   };
+  
+  function LogoutButton() {
+    const handleClick = () => {
+      localStorage.clear();
+    };
+  
+    return (
+      <Link to="/" onClick={handleClick}
+       className="btn logoutbtn">
+        Log out
+      </Link>
+    );
+  }
 
+  function RegisterButton() {
+    return (
+      <Link
+        to={'/sign-up'} 
+        className="btn">Register
+      </Link>
+    );
+  }
+  
   return (
     <header className="header-nav">
       <div className="container">
@@ -49,10 +74,7 @@ const Header = () => {
                     <a href='#faq'>FAQ</a>
                   </li>
                   <li className='buttonregist'>
-                  <Link
-                   to={'/sign-up'} 
-                   className="btn">Register
-                  </Link>
+                  { accessToken ? <LogoutButton /> : <RegisterButton />}
                   </li>
                 </ul>
               </div>

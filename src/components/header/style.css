@@ -46,9 +46,22 @@
   /* padding: 8px 12px; */
 }
 
+.logoutbtn {
+  background-color: white !important;
+  color: #0D28A6 !important;
+  border: 1px solid #0D28A6 !important;
+  border-radius: 2px !important;
+
+}
+
+
 a.btn:hover {
   color: black !important;
   text-decoration: none !important;
+}
+
+.logoutbtn:hover {
+  color: #0D28A6 !important;
 }
 
 
